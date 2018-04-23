@@ -195,7 +195,7 @@ pub fn uumain(args: Vec<String>) -> i32 {
             {
                 atime = st.0;
             }
-
+            
             if !(matches.opt_present("m") || time.contains(&"modify".to_owned())
                 || time.contains(&"mtime".to_owned()))
             {
@@ -204,7 +204,7 @@ pub fn uumain(args: Vec<String>) -> i32 {
         }
 
         if matches.opt_present("h") {
-            if let Err(e) = set_symlink_times(path, atime, mtime) {
+            if let Err(e) = filetime::set_file_times(path, atime, mtime) {
                 show_warning!("cannot touch '{}': {}", path, e);
             }
         } else {
